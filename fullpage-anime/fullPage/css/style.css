@@ -12,6 +12,38 @@ a {
   text-decoration: none;
 }
 
+.inner {
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1.title {
+  font-size: 50px;
+  color: #fff;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.3s ease-in-out;
+  transition-delay: 1s;
+}
+
+#sec1 h1.title {
+  transform: translateY(-100%) translateX(0);
+}
+
+/*active class text animation*/
+#sec1.section.active h1.title {
+  transform: translateY(0%) translateX(0);
+}
+
+.section.active h1.title {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 #sec0 {
   background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
 }
@@ -33,6 +65,7 @@ a {
   background-color: #fff;
 }
 
+/* navigation menu design */
 #nav_icon {
   position: fixed;
   top: 30px;
