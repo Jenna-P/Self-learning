@@ -145,11 +145,20 @@ body.nav_active nav {
   justify-content: space-around;
 }
 
+#sec2 h1.title {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
 .slider_wrap {
   width: 600px;
   height: 400px;
   background-color: #ccc;
   position: relative;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.5s;
+  transform: translateX(50px);
 }
 
 slider_wrap .slide {
