@@ -93,4 +93,39 @@ const products = [
 
   console.log(map(p => p.price, products));
 
+  //make filter function
+  const filter = (f, iter) => {
+    let res = [];
+    for (const a of iter) {
+      if (f(a)) res.push(a);
+    }
+    return res;
+  };
+
+  // let under20000 = [];
+  // for (const p of products) {
+  //   if (p.price < 200) under200.push(p);
+  // }
+  // log(...under200);
+
+  console.log(...filter(p => p.price < 200, products));
+
+  // let over20000 = [];
+  // for (const p of products) {
+  //   if (p.price >= 200) over200.push(p);
+  // }
+  // log(...over200);
+
+  console.log(...filter(p => p.price >= 200, products));
+
+  console.log(filter(n => n % 2, [1, 2, 3, 4]));
+
+  console.log(filter(n => n % 2, function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+    yield 4;
+    yield 5;
+  }()));
+
   
