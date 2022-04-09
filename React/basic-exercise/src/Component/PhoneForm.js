@@ -14,8 +14,8 @@ export default class PhoneForm extends Component {
         });
     }
 
-    handleSubmit = (e) => { //prevent page reloading
-        e.preventDefault(); 
+    handleSubmit = (e) => { 
+        e.preventDefault(); //prevent page reloading
         this.props.onCreate(this.state);
         this.setState({
             name:'',

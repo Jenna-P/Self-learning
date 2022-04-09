@@ -1,40 +1,67 @@
-import { useState } from 'react';
+import React, { Component } from 'react'
 import './App.css';
 import Counter from './Component/Counter';
 import MyComponent from './Component/MyComponent';
 import Myname from './Component/Myname';
 import PhoneForm from './Component/PhoneForm';
-
-function App() {
-  let id = 0;
-  const [info, setInfo] = useState([]);
-  
+import PhoneList from './Component/PhoneList';
 
 
-  const handleCreate = (data) => {  //for getting data from child component
-    //setInfo(prevArray => [...prevArray, data]); // return object array
-   setInfo(info.concat({...data, id: id++}));
+export default class A extends Component {
+
+  id = 0;  //id is not for rendering, so not need to put state
+
+  state = {
+    information: [],
   }
   
-  return (
-    <div className="App">
-      
-      <div>
-        <Counter />
-        <MyComponent value= {5}/>
-      </div>
-      <hr />
-      <div>
-        <PhoneForm onCreate={handleCreate}/>
-        {JSON.stringify(info)}
-      </div>
-      <hr />
-      <div>
-        <h1>Functional Component * useState</h1>
-      <Myname />
-      </div>
-    </div>
-  );
-}
+  handleCreate = (data) => {
+    const { information } = this.state
+    this.setState({
+      information: information.concat({...data, id: this.id++})
+    })
+  }
 
-export default App;
+  handleRemove = (id) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.filter(info => info.id !== id)
+    })
+  }
+
+  handleUpdate = (id, data) => {
+    const { information } =this.state;
+    this.setState({
+      information: information.map(info => {
+        if(info.id === id) {
+          return {
+            id,
+            ...data,
+          };
+        }
+        return info;
+      })
+    })
+  }
+    
+  render() {
+    return (
+        <div className="App">
+            <div>
+            <Counter />
+            <MyComponent value= {5}/>
+            </div>
+            <hr />
+            <div>
+            <PhoneForm onCreate={this.handleCreate} />
+            <PhoneList data={this.state.information} onRemove={this.handleRemove} onUpdate={this.handleUpdate}/>
+            </div>
+            {/* <hr />
+            <div>
+            <h1>Functional Component * useState</h1>
+            <Myname />
+            </div> */}
+      </div>
+    )
+  }
+}
