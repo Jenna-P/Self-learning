@@ -14,10 +14,10 @@ function CountTodo() {
     //           )
     //       }
     //   </TodoContext.Consumer>
-
-   <div>
-        <p>{todos.filter(v => v.status === "todo").length} to complete! </p>
-   </div>
+    <div>
+          <h1>TO-DO APP</h1>
+          <p>{todos.filter(v => v.status === "todo").length} to complete! </p>
+    </div>
   )
 }
 
