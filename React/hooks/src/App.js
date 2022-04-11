@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import List from './List';
 import './App.css';
 import CountTodo from './CountTodo';
+import Form from './Form'
 
 const useFetch = (callback, url) => {  //custom hook : (sideEffect, fetching data 분리) -> can use as module 
   const [loading, setLoading] = useState(false);
@@ -25,17 +26,17 @@ export const TodoContext = React.createContext();
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+  //const [input, setInput] = useState("");
   
   const loading = useFetch(setTodos, 'https://gist.githubusercontent.com/Jenna-P/e15366febc79f7a0b3c3ec2d065d3397/raw/03b1c7e807b28ce32f0ac1684bc511c11062ebfa/'); //after fetch everythigs well loaded 
 
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  }
+  // const handleChange = (e) => {   //if we use "useRef" dont need to use onChange in input
+  //   setInput(e.target.value);
+  // }
 
-  const handleClickAdd = (e) => {
-    e.preventDefault(); //avoid reRender
-    setTodos([...todos, {'id': todos.length, 'title': input, 'status': 'todo'}]);
+  const handleClickAdd = (newTodo) => {   //newTodo : wil read useRef from Form.js
+   // e.preventDefault(); //avoid reRender
+    setTodos([...todos, {'id': todos.length, 'title': newTodo, 'status': 'todo'}]);
   }
 
   const changeTodosStatus = (id) => {
@@ -56,16 +57,12 @@ function App() {
   
   return (
     <div className="App">
-      {/* Context API  */}
-      <TodoContext.Provider value={{todos}}>   
+      
+      <TodoContext.Provider value={{todos, handleClickAdd}}>   
         <header className="App-header">
           <h1>TO-DO APP</h1>
           <CountTodo />
-          <form>
-            <input type="text" name="" onChange={handleChange} value={input}/>
-            <button onClick={handleClickAdd}>ADD</button>
-            {/* because button is under form -> everytime submiting render them again  */}
-          </form>
+          <Form />
         </header>
         <List todos={todos} loading={loading} changeTodosStatus={changeTodosStatus} />  
       </TodoContext.Provider>
