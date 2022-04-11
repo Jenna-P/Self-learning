@@ -11,8 +11,6 @@ This repository contains all the tutorials I have learned by self-learning.
 - HTML
 - CSS
 - React
-- Angular
-- Vue
 - Fullpage.js
 - Anime.js
 
