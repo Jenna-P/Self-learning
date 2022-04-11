@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoContext } from './App.js'
 
-function CountTodo(props) {
+function CountTodo() {   
+    const {todos} = useContext(TodoContext);    // using useContaxt
   return (
-    <div>
-      <p>{props.todos.length} to complete! </p>
-    </div>
+      //instead of props  using context API 
+    //   <TodoContext.Consumer>  
+    //       {
+    //           ({todos}) => (
+    //             <div>
+    //                 <p>{todos.filter(v => v.status === "todo").length} to complete! </p>
+    //             </div>
+    //           )
+    //       }
+    //   </TodoContext.Consumer>
+
+   <div>
+        <p>{todos.filter(v => v.status === "todo").length} to complete! </p>
+   </div>
   )
 }
 

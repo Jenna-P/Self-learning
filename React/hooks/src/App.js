@@ -21,6 +21,8 @@ const useFetch = (callback, url) => {  //custom hook : (sideEffect, fetching dat
   return loading;
 }
 
+export const TodoContext = React.createContext();
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
@@ -54,18 +56,19 @@ function App() {
   
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>TO-DO APP</h1>
-        <CountTodo todos={todos} />
-        <form>
-          <input type="text" name="" onChange={handleChange} value={input}/>
-          <button onClick={handleClickAdd}>ADD</button>
-          {/* because button is under form -> everytime submiting render them again  */}
-        </form>
-      </header>
-      <div>
+      {/* Context API  */}
+      <TodoContext.Provider value={{todos}}>   
+        <header className="App-header">
+          <h1>TO-DO APP</h1>
+          <CountTodo />
+          <form>
+            <input type="text" name="" onChange={handleChange} value={input}/>
+            <button onClick={handleClickAdd}>ADD</button>
+            {/* because button is under form -> everytime submiting render them again  */}
+          </form>
+        </header>
         <List todos={todos} loading={loading} changeTodosStatus={changeTodosStatus} />  
-      </div>
+      </TodoContext.Provider>
     </div>
   );
 }
