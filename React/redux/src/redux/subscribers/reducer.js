@@ -4,7 +4,7 @@ const initialState = {
     count: 370
 }
 
-const reducer = (state=initialState, action) => {
+const subscribersReducer = (state=initialState, action) => {
     switch(action.type){
         case ADD_SUBSCRIBER:
             return {
@@ -21,4 +21,4 @@ const reducer = (state=initialState, action) => {
     }
 }
 
-export default reducer
+export default subscribersReducer

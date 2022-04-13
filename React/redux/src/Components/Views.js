@@ -1,19 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { addSubscriber } from '../redux/index'
+import { addView } from '../redux/index'
 
-function Subscribers({ count, addSubscriber}) {
+function Views({ count, addView}) {
   return (
     <div className="item">
-      <h3>Subscribers: {count}  </h3>
-      <button onClick={()=> addSubscriber()}>Subscribe</button>
+      <h3>Views: {count}  </h3>
+      <button onClick={()=>  addView()}>Add View</button>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
     return {
-        count: state.subscribers.count
+        count: state.views.count
     }
 }
 
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {   //pass object
     // addSubscriber: addSubscriber   -> es6 프로퍼티와 밸류 값이 같으면 하나만 써도 됨
-    addSubscriber
+    addView
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Subscribers)
+export default connect(mapStateToProps, mapDispatchToProps)(Views)
